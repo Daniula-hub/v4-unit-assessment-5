@@ -3,4 +3,12 @@ const initialState = {
     profile_pic: '',
   }
 
-  export default reducer(state(initialState), action);
+  const reducer = (state=initialState, action) => {
+    switch(action.type) {
+        case INCREMENT: {
+            console.log({
+             ...state,
+  })
+}
+
+
