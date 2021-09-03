@@ -12,9 +12,9 @@
       }
       const salt = bcrypt.genSaltSync(10);
       const hash = bcrypt.hashSync(password, salt);
-      const registeredUser = await db.register_user([username, hash, profile_pic]);
+      const registeredUser = await db.register_user([username, hash]);
       const user = registeredUser[0];
-      req.session.user = { id: user.id, username: user.username, profile_pic: user.profile_pic };
+      req.session.user = { id: user.id, username: user.username };
       return res.status(201).send(req.session.user);
     },
   
@@ -38,14 +38,18 @@
         return res.sendStatus(200);
       },
 
-    // getUser:  async (req, res) => {
-    //     const { username, password } = req.body;
-    //     req.session.user = { id: user.id, username: user.username };
-    //     return res.send(req.session.user);
-    //     else {
-    //       return res.status(404).send('Not Found');
-    //     }
-};
+      
+    getUser:  async (req, res) => {
+     const { password: hash } = user[0];
+      const areEqual = bcryptjs.compareSync(password, hash);
+        if (areEqual, user[0]) {
+          req.session.loggedIn = true;
+          res.status(200).json(user);
+        } else {
+          return res.status(404).send('Not Found')
+    }
+  },
+}
 
 
 

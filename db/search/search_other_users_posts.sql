@@ -1,0 +1,3 @@
+-- select p.id as post_id, title, content, img, profile_pic, date_created, username as author_username from helo_posts p
+-- where 
+-- order by date_created desc;

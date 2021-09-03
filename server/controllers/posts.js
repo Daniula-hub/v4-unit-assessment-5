@@ -39,6 +39,16 @@ module.exports = {
     },
     createPost: (req, res) => {
       //code here
+      const { id } = req.session.user;
+      const { title, img, content } = req.body;
+      // const date = newDate;
+      const db = req.app.get('db');
+      if (id == true){
+      db.post.create_post([id,title,img,content,date])
+      .then(posts => res.status(200).send(posts))
+    } else {
+     return  res.status(403).send('Forbidden');
+      }
     },
     readPost: (req, res) => {
       req.app.get('db').post.read_post(req.params.id)
